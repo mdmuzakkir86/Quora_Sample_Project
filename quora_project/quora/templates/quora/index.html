@@ -1,0 +1,51 @@
+{% extends "quora/base.html" %}
+
+{% block content %}
+
+<div class="div1">
+   <p>Quora - Feel free to ask any question here, and others will provide answers to your questions </p>
+
+   <p> To ask a new question, you must select or add an appropriate category for it here <a href="{% url 'quora:categories' %}">Ask Question</a></p>
+</div>
+
+
+<!-- <p>
+    {% for question in questions %}
+    <li style="list-style-type: none">
+    	<p>Asked on {{ question.date_added|date:'M d, Y' }} by {{ question.owner.username.title }}</p>
+            <p><b>Quastion:</b> {{ question.text }}</p>
+            <p>
+				<a href="{% url 'quora:list_answers' question.id %}">See Answers</a>	
+				<a href="{% url 'quora:answer_question' question.id %}">answer question</a>
+            </p>
+     </li>
+      {% empty %}
+      <li>
+         There are no questions yet.
+      </li>
+     {% endfor %}
+</p> -->
+
+
+
+<div class="questions-container">
+    {% for question in questions %}
+    <div class="question-box">
+        <p>Asked on {{ question.date_added|date:'M d, Y' }} by {{ question.owner.username.title }}</p>
+        <p><b>Question:</b> {{ question.text }}</p>
+        <div class="action-box">
+            <a class="see-answers-link" href="{% url 'quora:list_answers' question.id %}">See Answers</a>
+            <a class="answer-question-link" href="{% url 'quora:answer_question' question.id %}">Answer Question</a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="question-box">
+        <p>There are no questions yet.</p>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends 'quora/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'quora/css/category.css' %}">
+  <p class="category-header">Category: {{ category }}</p>
+  <p>
+    <a href="{% url 'quora:new_question' category.id %}" class="new-question-link">Add new question</a>
+  </p>
+  <p>Questions:</p>
+  
+  <ul class="question-list">
+  {% for question in questions %}
+   <li class="question-item">
+    <p>{{ question.text|linebreaks }}</p>
+    <p>
+        <a href="{% url 'quora:list_answers' question.id %}" class="see-answer-link">See Answers</a>
+        {% ifequal question.owner request.user %}
+          <a href="{% url 'quora:edit_question' question.id %}" class="edit-question-link">Edit Question</a>
+        {% endifequal %}
+    </p>
+   </li>
+   {% empty %}
+   <li>
+    There are no questions for this category yet.
+   </li>
+  {% endfor %}
+  </ul>
+{% endblock content %}

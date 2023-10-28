@@ -1,0 +1,10 @@
+{% extends "quora/base.html" %}
+{% block content %}
+ <p>Add a new category:</p>
+
+ <form action="{% url 'quora:new_category' %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">add categories</button>
+</form>
+{% endblock content %}

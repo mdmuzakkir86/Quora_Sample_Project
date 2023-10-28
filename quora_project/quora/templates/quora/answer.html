@@ -1,0 +1,39 @@
+{% extends 'quora/base.html' %}
+
+{% block content %}
+
+  <p>Question: {{ question.text }} </p>
+ 
+  
+  <ul>
+  {% for answer in answers %}
+   <li>
+    
+    <p>Answer-{{forloop.counter}} | Answered by: {{ answer.owner.username }}</p>
+    <p>{{ answer.text|linebreaks }}</p>
+    
+    <p>
+      {% if user.is_authenticated %}
+        <form method="post" action="{% url 'quora:like_answer' answer.id %}">
+            {% csrf_token %}
+            <button type="submit" class="like-button">
+                {% if request.user in answer.liked_by.all %}
+                    Unlike
+                {% else %}
+                    Like
+                {% endif %}
+            </button>
+            <span class="likes-count">{{ answer.liked_by.count }} likes</span>
+        </form>
+      {% endif %}
+      
+    </p>
+    
+   </li>
+   {% empty %}
+   <li>
+    There are no answers for this question yet.
+   </li>
+  {% endfor %}
+  </ul>
+{% endblock content %}

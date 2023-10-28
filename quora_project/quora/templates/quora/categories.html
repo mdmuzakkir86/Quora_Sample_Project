@@ -1,0 +1,21 @@
+{% extends "quora/base.html" %}
+
+{% block content %}
+
+<div id="categories-container">
+    <h2 id="categories-title">Categories</h2>
+    <h4 style="color: red;">Please choose or add the category to ask question</h4>
+    <ul class="categories-list">
+        {% for category in categories %}
+            <li class="category-item">
+                <a class="category-link" href="{% url 'quora:category' category.id %}">{{ category }}</a>
+            </li>
+        {% empty %}
+            <li>No categories have been added yet.</li>
+        {% endfor %}
+    </ul>
+
+    <a id="add-category-link" href="{% url 'quora:new_category' %}">Add a new category</a>
+</div>
+
+{% endblock content %}
