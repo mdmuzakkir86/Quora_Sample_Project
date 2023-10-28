@@ -1,4 +1,4 @@
-# To run the project without any issue follow steps, when project is cloned move to Quora_Sample_Project folder --> quora_project folder --> Then run the project
+# To run the project without any issue follow steps:
 1. Move to Quora_Sample_Project folder
 2. Move to venv folder --> Script folder --> Then type activate and hit enter
 3. Then move back to Quora_Sample_Project (windows command: cd ..)
